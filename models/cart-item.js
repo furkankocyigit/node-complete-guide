@@ -3,7 +3,7 @@ const Sequalize = require('sequelize')
 const sequalize = require('../util/database')
 
 
-const Cart = sequalize.define('cart',
+const CartItem = sequalize.define('cartItem',
 {
     id:
     {
@@ -12,7 +12,8 @@ const Cart = sequalize.define('cart',
         allowNull:false,
         primaryKey:true
     },
+    quantity:Sequalize.INTEGER
 
 })
 
-module.exports = Cart
+module.exports = CartItem
