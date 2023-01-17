@@ -3,7 +3,7 @@ const Sequalize = require('sequelize')
 const sequalize = require('../util/database')
 
 
-const Cart = sequalize.define('cart',
+const Order = sequalize.define('order',
 {
     id:
     {
@@ -15,4 +15,4 @@ const Cart = sequalize.define('cart',
 
 })
 
-module.exports = Cart
+module.exports = Order
