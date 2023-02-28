@@ -21,6 +21,7 @@ exports.getSignup = (req, res, next) => {
       pageTitle: 'Signup',
       errorMessage: message,
     });
+    
   };
 
 exports.postLogin = (req,res,next) =>{
