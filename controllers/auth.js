@@ -5,7 +5,7 @@ const sendGridTransport = require('nodemailer-sendgrid-transport')
 const crypto = require('crypto')
 //
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 // const transporter = nodemailer.createTransport(sendGridTransport({
 //     auth: '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'
