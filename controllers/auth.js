@@ -8,7 +8,7 @@ const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 // const transporter = nodemailer.createTransport(sendGridTransport({
-//     auth: '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'
+//     auth: ''
 // }))
 
 exports.getLogin = (req,res,next) =>{
