@@ -8,12 +8,8 @@ const {validationResult} = require('express-validator/check')
 
 //
 const sgMail = require('@sendgrid/mail')
-//sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-// const transporter = nodemailer.createTransport(sendGridTransport({
-//     auth: ''
-// }))
 
 exports.getLogin = (req,res,next) =>{
     let message = req.flash('error');
