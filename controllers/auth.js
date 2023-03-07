@@ -10,7 +10,6 @@ const {validationResult} = require('express-validator/check')
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-
 exports.getLogin = (req,res,next) =>{
     let message = req.flash('error');
     message = message.length > 0 ? message[0] : null;
@@ -63,7 +62,6 @@ exports.postLogin = (req,res,next) =>{
         })
 
     }
-
     User.findOne({email:email})
     .then(user => {
             if(!user){
@@ -91,7 +89,7 @@ exports.postLogin = (req,res,next) =>{
                     return res.status(422).render('auth/login',{
                         path: '/login',
                         pageTitle:'Login',
-                        errorMessage: "Email with this user is not exist",
+                        errorMessage: "Password is not correct for this user",
                         oldInput:{
                             email: email,
                             password: password
@@ -102,7 +100,11 @@ exports.postLogin = (req,res,next) =>{
                 .catch(err => console.log(err))
         })
         
-    .catch(err => console.log(error))
+        .catch(err => {
+            const error = new Error(err)
+            error.httpStatusCode = 500;
+            return next(error)
+        }) 
 }
 
 exports.postSignup = (req, res, next) => {
@@ -145,7 +147,11 @@ exports.postSignup = (req, res, next) => {
                     console.error(error)
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                const error = new Error(err)
+                error.httpStatusCode = 500;
+                return next(error)
+            }) 
 };
 
 exports.postLogout = (req,res,next) =>{
@@ -202,8 +208,10 @@ exports.postReset = (req,res,next) => {
             })
         })
         .catch(err => {
-            console.log(err)
-        })
+            const error = new Error(err)
+            error.httpStatusCode = 500;
+            return next(error)
+        }) 
     })
 }
 
@@ -222,7 +230,11 @@ exports.getNewPassword = (req,res,next) => {
                     passwordToken: token
         });
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        const error = new Error(err)
+        error.httpStatusCode = 500;
+        return next(error)
+    }) 
     
 }
 
@@ -247,5 +259,9 @@ exports.postNewPassword = (req,res,next) => {
         }).then(result => {
             res.redirect('/login')
         })
-        .catch( err => console.log(err))
+        .catch(err => {
+            const error = new Error(err)
+            error.httpStatusCode = 500;
+            return next(error)
+        }) 
 }
